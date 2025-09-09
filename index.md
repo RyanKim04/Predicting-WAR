@@ -192,7 +192,8 @@ Then, to mimic real forecasting, I used a walk-forward scheme:
 1. Train on all seasons up to year t
 2. Test on year t+1
 3. Repeat for every possible cutoff
-4. Average results across all test years  
+4. Average results across all test years
+   
 This prevents data leakage and mirrors how teams would actually predict an upcoming season.
 
 ```python
@@ -256,6 +257,7 @@ Interpretation
 - XGBoost was solid but not dominant here — possibly due to limited sample size or overfitting risk in a time-series setting.
 - KNN struggled in high-dimensional space, and Gradient Boosting underperformed relative to Random Forest.
 - Overall, results suggest that simpler models (Lasso, Ridge) are strong baselines, while tree ensembles are competitive but don’t always guarantee superior results in this dataset.
+  
 Since, Lasso Regression has the lowest RMSE and highest R², we select Lasso Regression from the 6 models we compared.
 
 
