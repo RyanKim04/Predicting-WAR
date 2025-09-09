@@ -87,6 +87,14 @@ def next_season(player):
 
 pitching = pitching.groupby("IDfg", group_keys=False).apply(next_season)
 ```
+### 4) Outcome
+Now, each row in the dataset represents:
+Features: performance metrics from season t
+Label: Next_WAR from season t+1
+This setup mirrors the real-world task of forecasting how a pitcher will perform in the upcoming year.
+
+<img width="1174" height="269" alt="image" src="https://github.com/user-attachments/assets/f4da4de5-2ad7-4cff-98e9-ad1018303695" />
+
 
 
 📂 Notebook: [Data Cleaning](notebooks/01-data-cleaning.ipynb)
