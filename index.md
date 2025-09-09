@@ -51,10 +51,43 @@ In this project, our target is to predict **next season’s pitcher WAR**:
 
 
 ## Data Preparation / Cleaning
-- **Source**: [pybaseball](https://github.com/jldbc/pybaseball) for MLB stats  
-- **Steps**:
-  - Handle missing values (null handling)  
-  - Drop highly collinear features  
+### Data Preparation
+
+The first step was to construct a dataset where the **target** is each pitcher’s **next-season WAR**.  
+We pulled historical pitching stats with the [pybaseball](https://github.com/jldbc/pybaseball) library and transformed them to fit this supervised learning setup.
+
+---
+
+### 1) Collect pitching stats
+We retrieved data from **2002–2024**, filtering for pitchers with at least 50 innings pitched to avoid unstable small-sample WAR values.
+
+```python
+from pybaseball import pitching_stats
+
+START, END = 2002, 2024
+pitching = pitching_stats(START, END, qual=50)
+```
+
+### 2) Handle special cases
+We removed 2020 season due to COVID-shortened schedule. We also only kept pitchers with 2+ seasons so that we can have a next-season WAR label on our dataset.
+
+```python
+pitching = pitching[pitching["Season"] != 2020]
+pitching = pitching.groupby("IDfg", group_keys=False).filter(lambda g: g.shape[0] > 1)
+```
+
+### 3) Define the prediction target
+For each pitcher, we sorted their seasons chronologically and created a new column Next_WAR, which represents the WAR in the following season.
+
+```python
+def next_season(player):
+    player = player.sort_values("Season")
+    player["Next_WAR"] = player["WAR"].shift(-1)
+    return player
+
+pitching = pitching.groupby("IDfg", group_keys=False).apply(next_season)
+```
+
 
 📂 Notebook: [Data Cleaning](notebooks/01-data-cleaning.ipynb)
 
