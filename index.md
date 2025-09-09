@@ -248,13 +248,16 @@ leaderboard = pd.DataFrame({
 
 With this code, we are able to see the result:
 
-https://chatgpt.com/backend-api/estuary/content?id=file-Jamp87yZbQuEWgrZVwXxou&ts=488178&p=fs&cid=1&sig=8765ecb25086bebf4e7a585c5e592e455d2a5cb67924e3c25640ab47a4b0a4c7&v=0<img width="900" height="732" alt="image" src="https://github.com/user-attachments/assets/5fc20b7e-5cfb-4f30-a544-4f4e8e4cc703" />
+<img width="900" height="732" alt="image" src="https://github.com/user-attachments/assets/5fc20b7e-5cfb-4f30-a544-4f4e8e4cc703" />
 
 Interpretation
 - Lasso Regression surprisingly came out on top in terms of RMSE, showing that a simple linear model with L1 regularization can perform competitively.
 - Random Forest and Ridge followed closely, suggesting that ensembles and regularized linear models balance bias/variance well.
 - XGBoost was solid but not dominant here — possibly due to limited sample size or overfitting risk in a time-series setting.
 - KNN struggled in high-dimensional space, and Gradient Boosting underperformed relative to Random Forest.
+- Overall, results suggest that simpler models (Lasso, Ridge) are strong baselines, while tree ensembles are competitive but don’t always guarantee superior results in this dataset.
+Since, Lasso Regression has the lowest RMSE and highest R², we select Lasso Regression from the 6 models we compared.
+
 
 
 
