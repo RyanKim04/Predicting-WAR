@@ -66,11 +66,10 @@ START, END = 2002, 2024
 pitching = pitching_stats(START, END, qual=50)
 ```
 
-### 2) Handle special cases
-We removed 2020 season due to COVID-shortened schedule. We also only kept pitchers with 2+ seasons so that we can have a next-season WAR label on our dataset.
+### 2) Filtering
+We only kept pitchers with 2+ seasons so that we can have a next-season WAR label on our dataset.
 
 ```python
-pitching = pitching[pitching["Season"] != 2020]
 pitching = pitching.groupby("IDfg", group_keys=False).filter(lambda g: g.shape[0] > 1)
 ```
 
@@ -96,6 +95,28 @@ This setup mirrors the real-world task of forecasting how a pitcher will perform
 ### Data Cleaning
 Once the base dataset was constructed, we needed to address **missing values** and **irrelevant columns** before moving on to feature engineering.
 
+### 1) Inspect missing values
+We counted nulls across all columns:
+
+```python
+null_count = pitching.isnull().sum()
+null_count
+```
+
+<img width="193" height="224" alt="image" src="https://github.com/user-attachments/assets/06ed5ebb-01fb-45b9-b06a-a66cd973b082" />
+
+This shows some advanced metrics (e.g., Pitching+, Stf+ F0) had thousands of missing values, and Next_WAR was missing in the final season for each pitcher (as expected).
+
+### 2) Keep only complete columns
+We created a subset of columns with no missing values, and explicitly added back Next_WAR as the prediction target.
+
+```python
+complete_cols = list(pitching.columns[null_count == 0])
+pitching = pitching[complete_cols + ["Next_WAR"]].copy()
+```
+
+## Model Comparison
+After data cleaning, the next step was to benchmark several machine learning models for predicting **next-season WAR**.  
 
 
 
