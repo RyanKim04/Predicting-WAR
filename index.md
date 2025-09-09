@@ -56,8 +56,6 @@ In this project, our target is to predict **next season’s pitcher WAR**:
 The first step was to construct a dataset where the **target** is each pitcher’s **next-season WAR**.  
 We pulled historical pitching stats with the [pybaseball](https://github.com/jldbc/pybaseball) library and transformed them to fit this supervised learning setup.
 
----
-
 ### 1) Collect pitching stats
 We retrieved data from **2002–2024**, filtering for pitchers with at least 50 innings pitched to avoid unstable small-sample WAR values.
 
@@ -87,13 +85,14 @@ def next_season(player):
 
 pitching = pitching.groupby("IDfg", group_keys=False).apply(next_season)
 ```
-### 4) Outcome
+### 4) Data Preparation Outcome
 Now, each row in the dataset represents:
 Features: performance metrics from season t
 Label: Next_WAR from season t+1
 This setup mirrors the real-world task of forecasting how a pitcher will perform in the upcoming year.
 
-<img width="1174" height="269" alt="image" src="https://github.com/user-attachments/assets/f4da4de5-2ad7-4cff-98e9-ad1018303695" />
+<img width="1178" height="296" alt="image" src="https://github.com/user-attachments/assets/3059a168-84e6-44fe-bbd4-bc2ab4a6174d" />
+
 
 
 
