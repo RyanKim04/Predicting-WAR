@@ -118,23 +118,64 @@ pitching = pitching[complete_cols + ["Next_WAR"]].copy()
 ## Model Comparison
 After data cleaning, the next step was to benchmark several machine learning models for predicting **next-season WAR**.  
 
+We will be comparing the models below and choose the best model by comparing evaluation metrics (RMSE, R²)
+
+- **Linear models**: Ridge, Lasso (require scaling to handle feature magnitudes)
+- **Distance-based**: k-Nearest Neighbors (KNN)
+- **Tree ensembles**: Random Forest, Gradient Boosting, XGBoost (nonlinear, capture interactions)
+
+### 1) Feature Set
+We begin by defining the **feature set** for model training and separating the prediction target.
+
+```python
+exclude = {'Next_WAR', 'Season', 'Name', 'Team'}
+if 'IDfg' in df.columns:
+    exclude.add('IDfg')
+
+feature_cols = [c for c in df.columns if c not in exclude]
+X_all = df[feature_cols].select_dtypes(include=[np.number]).copy()
+y_all = df['Next_WAR'].values
+num_features = X_all.columns.tolist()
+```
+We remove columns that would cause data leakage or don’t serve as predictive features:
+Next_WAR: our target, can’t be used as input.
+Season: not predictive on its own (would cause leakage in time splits).
+Name, Team: identifiers, not stable predictors of skill.
+IDfg: player ID, excluded if present.
+After exclusions, we keep only numeric columns, since most ML regressors require numeric inputs.
+
+### 2) Per-model preprocessing
+
+Different models have different preprocessing needs, so I set up two pipelines:
+
+```python
+scaler = ColumnTransformer([('num', StandardScaler(), num_features)], remainder='drop')
+passthrough = ColumnTransformer([('num', 'passthrough', num_features)], remainder='drop')
+```
+scaler: applies standardization → used for Ridge, Lasso, and KNN.
+passthrough: leaves values as-is → used for tree ensembles like Random Forest, Gradient Boosting, and XGBoost.
+
+Next, I registered the models with their appropriate preprocessing:
+```python
+MODELS = {
+    'Ridge': (scaler, Ridge(alpha=5.0, random_state=42)),
+    'Lasso': (scaler, Lasso(alpha=0.01, max_iter=20000, random_state=42)),
+    'KNN': (scaler, KNeighborsRegressor(n_neighbors=15, weights='distance', p=2)),
+
+    'RandomForest': (passthrough, RandomForestRegressor(
+        n_estimators=600, min_samples_leaf=2, n_jobs=-1, random_state=42
+    )),
+    'GradientBoosting': (passthrough, GradientBoostingRegressor(
+        learning_rate=0.05, n_estimators=800, subsample=0.9, max_depth=3, random_state=42
+    )),
+    'XGBoost': (passthrough, XGBRegressor(
+        n_estimators=1200, max_depth=6, learning_rate=0.03,
+        subsample=0.8, colsample_bytree=0.8, random_state=42
+    )),
+}
+```
 
 
-
-
-📂 Notebook: [Data Cleaning](notebooks/01-data-cleaning.ipynb)
-
-## Model Comparison
-We performed a **walk-forward backtest** (train–test split by season) and evaluated multiple algorithms:
-
-1. Ridge Regression  
-2. Lasso Regression  
-3. Random Forest  
-4. XGBoost  
-5. K-Nearest Neighbors (KNN)  
-6. Gradient Boosting  
-
-✅ Best model selected by comparing evaluation metrics (e.g., RMSE, R², MAE).
 
 📂 Notebook: [Model Training](notebooks/02-model-training.ipynb)  
 📄 Report: [Model Comparison (HTML)](reports/model-comparison.html)
