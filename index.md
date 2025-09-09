@@ -3,7 +3,7 @@
 ## Objective
 Our goal is to **predict a pitcher’s next season WAR (Wins Above Replacement)** using historical statistics.
 
-## 📖 Table of Contents
+## Table of Contents
 1. [Explanation of WAR](#-explanation-of-war)  
 2. [Data Preparation / Cleaning](#-data-preparation--cleaning)  
 3. [Model Comparison](#-model-comparison)  
@@ -11,10 +11,27 @@ Our goal is to **predict a pitcher’s next season WAR (Wins Above Replacement)*
 5. [Results & Takeaways](#-results--takeaways)
 
 ## Explanation of WAR
-- WAR measures a player’s overall contribution to their team.  
-- **Objective**: Predict next year’s WAR for pitchers, based on past performance.  
 
-## 🛠️ Data Preparation / Cleaning
+**Wins Above Replacement (WAR)** is a comprehensive baseball statistic designed to summarize a player’s total contributions to their team into a single number.  
+It answers the question:
+
+*“How many more wins does this player contribute compared to a replacement-level player (a readily available minor-leaguer or bench player)?”*
+
+
+
+
+
+---
+
+### ⚾ Why WAR Matters
+- WAR attempts to capture **both quality and quantity** of a player’s contributions.  
+- For pitchers, WAR accounts for:
+  - Innings pitched
+  - Runs allowed (adjusted for defense & park factors)
+  - Strikeouts, walks, and home runs  
+- It allows fair comparisons across **seasons, teams, and even eras**.
+
+## Data Preparation / Cleaning
 - **Source**: [pybaseball](https://github.com/jldbc/pybaseball) for MLB stats  
 - **Steps**:
   - Handle missing values (null handling)  
@@ -22,7 +39,7 @@ Our goal is to **predict a pitcher’s next season WAR (Wins Above Replacement)*
 
 📂 Notebook: [Data Cleaning](notebooks/01-data-cleaning.ipynb)
 
-## 🤖 Model Comparison
+## Model Comparison
 We performed a **walk-forward backtest** (train–test split by season) and evaluated multiple algorithms:
 
 1. Ridge Regression  
@@ -37,7 +54,7 @@ We performed a **walk-forward backtest** (train–test split by season) and eval
 📂 Notebook: [Model Training](notebooks/02-model-training.ipynb)  
 📄 Report: [Model Comparison (HTML)](reports/model-comparison.html)
 
-## 🔍 Further Analysis
+## Further Analysis
 - **2024 Prediction**: Compare predicted WAR vs. actual WAR (when available).  
 - **Limitations**:
   - Feature availability (injury history, pitch types, etc.)  
@@ -48,7 +65,7 @@ We performed a **walk-forward backtest** (train–test split by season) and eval
 
 📂 Notebook: [Further Analysis](notebooks/03-further-analysis.ipynb)
 
-## 📊 Results & Takeaways
+## Results & Takeaways
 - Random Forest and XGBoost performed best on validation metrics.  
 - Predictions for 2024 WAR show reasonable alignment with early-season actuals.  
 
