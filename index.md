@@ -192,7 +192,7 @@ Then, to mimic real forecasting, I used a walk-forward scheme:
 1. Train on all seasons up to year t
 2. Test on year t+1
 3. Repeat for every possible cutoff
-4, Average results across all test years
+4. Average results across all test years  
 This prevents data leakage and mirrors how teams would actually predict an upcoming season.
 
 ```python
