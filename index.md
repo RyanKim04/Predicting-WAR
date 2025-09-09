@@ -17,19 +17,38 @@ It answers the question:
 
 *“How many more wins does this player contribute compared to a replacement-level player (a readily available minor-leaguer or bench player)?”*
 
-
-
-
-
----
-
-### ⚾ Why WAR Matters
+### Why WAR Matters
 - WAR attempts to capture **both quality and quantity** of a player’s contributions.  
 - For pitchers, WAR accounts for:
   - Innings pitched
   - Runs allowed (adjusted for defense & park factors)
   - Strikeouts, walks, and home runs  
 - It allows fair comparisons across **seasons, teams, and even eras**.
+
+### Interpreting WAR for Pitchers
+The following ranges give a sense of how WAR translates to on-field ability:
+
+| WAR   | Ability                          |
+|-------|----------------------------------|
+| 0–1   | Replacement level                |
+| 1–2   | Utility player                   |
+| 2–3   | Average starter                  |
+| 3–4   | Above average starter            |
+| 4–5   | All-Star level player            |
+| 5–6   | Superstar, very well-known player|
+| 6+    | MVP level                        |
+
+For example,
+- A pitcher with **WAR = 3.5** is considered an **above average starter**.  
+- A pitcher with **WAR = 6.2** is performing at an **MVP level**, contributing 6+ wins more than a replacement-level pitcher.
+
+
+### Why We Predict WAR
+In this project, our target is to predict **next season’s pitcher WAR**:
+- WAR captures both **durability** (innings pitched) and **quality** (ERA, FIP, etc.).
+- It’s a single, widely understood number → perfect for benchmarking model accuracy.
+- WAR is valuable to **teams, analysts, and fans** for forecasting player impact.
+
 
 ## Data Preparation / Cleaning
 - **Source**: [pybaseball](https://github.com/jldbc/pybaseball) for MLB stats  
