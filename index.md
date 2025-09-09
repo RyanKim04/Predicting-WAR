@@ -91,7 +91,8 @@ Features: performance metrics from season t
 Label: Next_WAR from season t+1
 This setup mirrors the real-world task of forecasting how a pitcher will perform in the upcoming year.
 
-<img width="1178" height="296" alt="image" src="https://github.com/user-attachments/assets/3059a168-84e6-44fe-bbd4-bc2ab4a6174d" />
+<img width="1157" height="394" alt="image" src="https://github.com/user-attachments/assets/9d518e2f-f622-41cb-b9de-f92520f92ec2" />
+
 
 
 
