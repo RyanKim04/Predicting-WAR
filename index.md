@@ -1,9 +1,7 @@
 # ⚾ MLB Pitcher Performance Prediction
 
-## 🎯 Objective
+## Objective
 Our goal is to **predict a pitcher’s next season WAR (Wins Above Replacement)** using historical statistics.
-
----
 
 ## 📖 Table of Contents
 1. [Explanation of WAR](#-explanation-of-war)  
@@ -12,9 +10,8 @@ Our goal is to **predict a pitcher’s next season WAR (Wins Above Replacement)*
 4. [Further Analysis](#-further-analysis)  
 5. [Results & Takeaways](#-results--takeaways)
 
----
 
-## 📘 Explanation of WAR
+## Explanation of WAR
 - WAR measures a player’s overall contribution to their team.  
 - **Objective**: Predict next year’s WAR for pitchers, based on past performance.  
 
