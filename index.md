@@ -282,9 +282,9 @@ For many linear models, dropping highly correlated features can improve performa
 
 <img width="312" height="475" alt="image" src="https://github.com/user-attachments/assets/39d0ac0f-6652-4323-9ab3-b49bb57ec6d9" />
 
-<img width="548" height="38" alt="image" src="https://github.com/user-attachments/assets/02dc8627-bbcf-42b8-ae02-6234cee450e9" />
+However, after I re-ran my model, the results showed almost no difference in the final RMSE or R². Here, RMSE of 1.084 means that, on average, the model's prediction for a player's next-season WAR is typically off by about 1.084 wins. Also, R² of 0.383 means that the model's features explain about 38.3% of the total year-to-year variance in actual player WAR.
 
-However, after I re-ran my model, the results showed almost no difference in the final RMSE or R².
+<img width="682" height="416" alt="image" src="https://github.com/user-attachments/assets/04a0c9bc-42bf-4f85-93ad-8ae99faa1131" />
 
 This made sense. My model uses Lasso regression, which is already very good at handling multicollinearity on its own. By design, Lasso's regularization will select one feature from a highly correlated group and shrink the coefficients of the others to zero anyway. So, it turns out that manually removing those features beforehand didn't really add any value.
 
