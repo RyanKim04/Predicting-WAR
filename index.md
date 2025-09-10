@@ -266,7 +266,7 @@ We first want to have a look on the comparison of our model's prediction to the 
 
 <img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/26711a03-a246-45da-8ca8-c9f46284ea02" />
 
-Looking at the plot, you can see my model's predicted mean for next-season WAR tracks the actual average pretty well from year to year. There's a little dip around 2019, which I think reflects the home run surge and changes in the run environment. The 2020 season is the obvious outlier; the shortened COVID season compressed all the WAR totals and messed with player roles, which broke the model's calibration for that year.
+The model's out-of-sample predictions for mean next-season WAR track the actual results pretty well year-over-year. The little dip around the 2019 fold makes sense—that was the year of the home run spike, which dropped pitcher WAR. My model, trained on the years before that, naturally overpredicted a bit. The 2020 fold is a completely different problem; the 60-game season was such an outlier in terms of innings and player usage that the stats just aren't comparable, which is why the model's calibration breaks down there.
 
 So, I decided to just drop the 2020 data entirely (including the 2019→2020 backtest fold).
 
@@ -276,12 +276,20 @@ So, I decided to just drop the 2020 data entirely (including the 2019→2020 bac
 
 Once I removed it, the lines tracked much more closely, and the overall walk-forward fit got better—the RMSE went down and the R² went up.
 
-Now, to further improve the model
+To further improve the model, I decided to address highly collinear features—predictors that are strongly correlated with each other. I set a correlation threshold of 0.9 and removed any feature that exceeded it.
+
+For many linear models, dropping highly correlated features can improve performance and make the coefficients more stable. 
+
+<img width="312" height="475" alt="image" src="https://github.com/user-attachments/assets/39d0ac0f-6652-4323-9ab3-b49bb57ec6d9" />
+
+<img width="548" height="38" alt="image" src="https://github.com/user-attachments/assets/02dc8627-bbcf-42b8-ae02-6234cee450e9" />
+
+However, after I re-ran my model, the results showed almost no difference in the final RMSE or R².
+
+This made sense. My model uses Lasso regression, which is already very good at handling multicollinearity on its own. By design, Lasso's regularization will select one feature from a highly correlated group and shrink the coefficients of the others to zero anyway. So, it turns out that manually removing those features beforehand didn't really add any value.
 
 
-<img width="368" height="27" alt="image" src="https://github.com/user-attachments/assets/e58a45f4-a854-4aaf-aec0-fbfda6435e2e" />
 
-<img width="309" height="468" alt="image" src="https://github.com/user-attachments/assets/98ad32b4-09e0-4243-b9f0-7b4bf0b91b35" />
 
 
 
