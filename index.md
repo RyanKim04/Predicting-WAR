@@ -259,7 +259,15 @@ With this code, we are able to see the result:
   
 Since, Lasso Regression has the lowest RMSE and highest R², we select Lasso Regression from the 6 models we compared.
 
+## Improving the Model
 
+We first want to have a look on the comparison of our model's prediction to the actual WAR over time.
+
+<img width="359" height="98" alt="image" src="https://github.com/user-attachments/assets/1ca20153-ca5e-444d-ac07-ce3ed1c20ff9" />
+
+<img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/f9364e0d-49b3-4164-8a4e-af206a1390bb" />
+
+The mean WAR from 2004 to 2018 is fairly consistent, right around 1.5. However, we then see a minor spike down in 2019 which comes before we see a significant increase in 2020. Since we set our minimum IP to 50 to be included in the data, this shortened season saw significanly fewer qualified pitchers, and as a result, the smaller range of qualified players leaves out a lot of "inning eater" pitchers who would typically meet the inning threshold throughout the slog of a
 
 
 
