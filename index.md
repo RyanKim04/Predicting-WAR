@@ -252,7 +252,6 @@ With this code, we are able to see the result:
 <img width="900" height="732" alt="image" src="https://github.com/user-attachments/assets/5fc20b7e-5cfb-4f30-a544-4f4e8e4cc703" />
 
 - Lasso Regression surprisingly came out on top in terms of RMSE, showing that a simple linear model with L1 regularization can perform competitively.
-- Random Forest and Ridge followed closely, suggesting that ensembles and regularized linear models balance bias/variance well.
 - XGBoost was solid but not dominant here — possibly due to limited sample size or overfitting risk in a time-series setting.
 - KNN struggled in high-dimensional space, and Gradient Boosting underperformed relative to Random Forest.
 - Overall, results suggest that simpler models (Lasso, Ridge) are strong baselines, while tree ensembles are competitive but don’t always guarantee superior results in this dataset.
@@ -265,9 +264,24 @@ We first want to have a look on the comparison of our model's prediction to the 
 
 <img width="359" height="98" alt="image" src="https://github.com/user-attachments/assets/1ca20153-ca5e-444d-ac07-ce3ed1c20ff9" />
 
-<img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/f9364e0d-49b3-4164-8a4e-af206a1390bb" />
+<img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/26711a03-a246-45da-8ca8-c9f46284ea02" />
 
-The mean WAR from 2004 to 2018 is fairly consistent, right around 1.5. However, we then see a minor spike down in 2019 which comes before we see a significant increase in 2020. Since we set our minimum IP to 50 to be included in the data, this shortened season saw significanly fewer qualified pitchers, and as a result, the smaller range of qualified players leaves out a lot of "inning eater" pitchers who would typically meet the inning threshold throughout the slog of a
+Looking at the plot, you can see my model's predicted mean for next-season WAR tracks the actual average pretty well from year to year. There's a little dip around 2019, which I think reflects the home run surge and changes in the run environment. The 2020 season is the obvious outlier; the shortened COVID season compressed all the WAR totals and messed with player roles, which broke the model's calibration for that year.
+
+So, I decided to just drop the 2020 data entirely (including the 2019→2020 backtest fold).
+
+<img width="434" height="98" alt="image" src="https://github.com/user-attachments/assets/9bac1f95-2e98-4b63-aeab-9419bef3c8d4" />
+
+<img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/6813d48d-23d5-459f-8cf2-c72f8542cef4" />
+
+Once I removed it, the lines tracked much more closely, and the overall walk-forward fit got better—the RMSE went down and the R² went up.
+
+Now, to further improve the model
+
+
+<img width="368" height="27" alt="image" src="https://github.com/user-attachments/assets/e58a45f4-a854-4aaf-aec0-fbfda6435e2e" />
+
+<img width="309" height="468" alt="image" src="https://github.com/user-attachments/assets/98ad32b4-09e0-4243-b9f0-7b4bf0b91b35" />
 
 
 
