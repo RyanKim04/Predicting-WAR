@@ -251,7 +251,6 @@ With this code, we are able to see the result:
 
 <img width="900" height="732" alt="image" src="https://github.com/user-attachments/assets/5fc20b7e-5cfb-4f30-a544-4f4e8e4cc703" />
 
-Interpretation
 - Lasso Regression surprisingly came out on top in terms of RMSE, showing that a simple linear model with L1 regularization can perform competitively.
 - Random Forest and Ridge followed closely, suggesting that ensembles and regularized linear models balance bias/variance well.
 - XGBoost was solid but not dominant here — possibly due to limited sample size or overfitting risk in a time-series setting.
