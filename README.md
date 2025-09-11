@@ -1,4 +1,4 @@
-Generate **current-year MLB WAR projections** and compare them to public projections (e.g., Steamer, ZiPS).  
+Generate **current-year MLB WAR projections**  
 The repo provides a reproducible notebook workflow that outputs a CSV you can share or analyze.
 
 [Open the analysis notebook](files/predictions_analysis.ipynb) •
