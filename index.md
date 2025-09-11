@@ -7,8 +7,7 @@ Our goal is to **predict a pitcher’s next season WAR (Wins Above Replacement)*
 1. [Explanation of WAR](#-explanation-of-war)  
 2. [Data Preparation / Cleaning](#-data-preparation--cleaning)  
 3. [Model Comparison](#-model-comparison)  
-4. [Further Analysis](#-further-analysis)  
-5. [Results & Takeaways](#-results--takeaways)
+4. [Improving the Model](#-improving-the-model)  
 
 ## Explanation of WAR
 
@@ -310,36 +309,18 @@ Other Logical Factors: The signs for other features line up with baseball sense:
 
 Ignored Features: Most other coefficients "hug zero," which is exactly what Lasso is supposed to do: it keeps the few features that matter and quietly shrinks the rest.
 
+<img width="781" height="254" alt="image" src="https://github.com/user-attachments/assets/f657c99c-227a-485c-9e7e-2bb2d5091986" />
 
+Finally, we can look at the top 10 pitchers for 2025 as predicted by the model and compare them to the Steamer and ZiPS projections to see how well our model holds up against industry standards. Note that at the time of this report is written, 2025 season has not ended yet so we would not be able to compare with the actual statistic. 
 
+- Steamer is a widely respected projection system that relies heavily on a player's recent stats, using regression and weighting to account for league-wide changes and aging curves.
 
+- ZiPS (the SZymborski Projection System) is another top system that uses multi-year stats and historical player comparisons to generate a range of potential outcomes for a player.
 
+n summary, the model demonstrated solid predictive performance with an RMSE of 1.084, indicating its forecasts for next-season WAR are typically off by about 1.08 wins. Furthermore, with an R-squared of 0.383, the model successfully explains 38.3% of the year-to-year variance in pitcher performance.
 
+When benchmarked against established industry projections like Steamer and ZiPS, the model proved to be quite credible, identifying a similar cohort of top-tier pitchers and producing comparable results. While more validation would be needed to match their established credibility, this strong initial alignment serves as an excellent proof-of-concept.
+
+Looking ahead, several avenues could further enhance the model's accuracy. Incorporating and scoring historical injury data could help account for health risks, while creating a more robust distinction between starting pitchers and relievers could capture the unique performance drivers of each role. For this particular analysis, a unified approach was chosen to maintain a larger and richer dataset, but role-specific modeling is a clear next step for future iterations.
 
 📂 Notebook: [Model Training](notebooks/02-model-training.ipynb)  
-📄 Report: [Model Comparison (HTML)](reports/model-comparison.html)
-
-## Further Analysis
-- **2024 Prediction**: Compare predicted WAR vs. actual WAR (when available).  
-- **Limitations**:
-  - Feature availability (injury history, pitch types, etc.)  
-  - Small-sample bias for rookies  
-- **Areas of Improvement**:
-  - Incorporate Statcast data  
-  - Try deep learning approaches (RNN, Transformers)  
-
-📂 Notebook: [Further Analysis](notebooks/03-further-analysis.ipynb)
-
-## Results & Takeaways
-- Random Forest and XGBoost performed best on validation metrics.  
-- Predictions for 2024 WAR show reasonable alignment with early-season actuals.  
-
-![Sample Plot](assets/sample-plot.png)
-
-## 📂 Repository Structure
-
-## 🙌 About
-This project was built for exploring **sports analytics + machine learning**.  
-Feel free to fork, run, or contribute!  
-
-🔗 Connect: [LinkedIn](https://linkedin.com/in/yourname) | [GitHub](https://github.com/yourusername)
