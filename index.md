@@ -51,7 +51,6 @@ In this project, our target is to predict **next season’s pitcher WAR**:
 
 
 ## Data Preparation / Cleaning
-### Data Preparation
 
 The first step was to construct a dataset where the **target** is each pitcher’s **next-season WAR**.  
 We pulled historical pitching stats with the [pybaseball](https://github.com/jldbc/pybaseball) library and transformed them to fit this supervised learning setup.
@@ -92,10 +91,9 @@ This setup mirrors the real-world task of forecasting how a pitcher will perform
 
 <img width="1157" height="394" alt="image" src="https://github.com/user-attachments/assets/9d518e2f-f622-41cb-b9de-f92520f92ec2" />
 
-### Data Cleaning
 Once the base dataset was constructed, we needed to address **missing values** and **irrelevant columns** before moving on to feature engineering.
 
-### 1) Inspect missing values
+### 5) Inspect missing values
 We counted nulls across all columns:
 
 ```python
@@ -107,7 +105,7 @@ null_count
 
 This shows some advanced metrics (e.g., Pitching+, Stf+ F0) had thousands of missing values, and Next_WAR was missing in the final season for each pitcher (as expected).
 
-### 2) Keep only complete columns
+### 6) Keep only complete columns
 We created a subset of columns with no missing values, and explicitly added back Next_WAR as the prediction target.
 
 ```python
@@ -288,7 +286,9 @@ However, after I re-ran my model, the results showed almost no difference in the
 
 This made sense. My model uses Lasso regression, which is already very good at handling multicollinearity on its own. By design, Lasso's regularization will select one feature from a highly correlated group and shrink the coefficients of the others to zero anyway. So, it turns out that manually removing those features beforehand didn't really add any value.
 
+<img width="989" height="970" alt="image" src="https://github.com/user-attachments/assets/020627e1-7131-4605-97de-2e9c257c79e5" />
 
+Now I wanted to look at feature importance, which I can read off the plot of standardized Lasso coefficients. With features on the same scale, the bar lengths are comparable, and the story is pretty clean: last-year WAR is by far the strongest positive signal (performance persists), with strikeouts (SO) next. Games pitched (G) swings negative—basically a reliever proxy, where lots of appearances with fewer innings correlates with lower next-year WAR once other stuff is held fixed. The signs mostly line up with baseball sense: xFIP and BB/9 tilt negative, Zone% positive, Age a touch negative. The small positive on HR/FB looks odd until you remember regression to the mean—elevated HR/FB often snaps back the following season. Most other coefficients hug zero, which is exactly what Lasso is supposed to do: keep the few features that matter and quietly shrink the rest.
 
 
 
