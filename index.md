@@ -288,7 +288,29 @@ This made sense. My model uses Lasso regression, which is already very good at h
 
 <img width="989" height="970" alt="image" src="https://github.com/user-attachments/assets/020627e1-7131-4605-97de-2e9c257c79e5" />
 
-Now I wanted to look at feature importance, which I can read off the plot of standardized Lasso coefficients. With features on the same scale, the bar lengths are comparable, and the story is pretty clean: last-year WAR is by far the strongest positive signal (performance persists), with strikeouts (SO) next. Games pitched (G) swings negative—basically a reliever proxy, where lots of appearances with fewer innings correlates with lower next-year WAR once other stuff is held fixed. The signs mostly line up with baseball sense: xFIP and BB/9 tilt negative, Zone% positive, Age a touch negative. The small positive on HR/FB looks odd until you remember regression to the mean—elevated HR/FB often snaps back the following season. Most other coefficients hug zero, which is exactly what Lasso is supposed to do: keep the few features that matter and quietly shrink the rest.
+Now I wanted to look at feature importance, which I can read off the plot of standardized Lasso coefficients. 
+
+With all features on the same scale, we can directly compare the bar lengths to see what's driving the predictions.
+
+### Key Positive Signals
+
+Last-Year WAR: By far the strongest positive signal, showing that performance persists year-over-year.
+
+Strikeouts (SO): The next most important positive predictor.
+
+HR/FB Rate: The small positive coefficient looks odd at first, but it makes sense when you consider regression to the mean—an elevated (unlucky) HR/FB rate often "snaps back" with better performance the following season.
+
+### Key Negative Signals
+
+Games Pitched (G): Swings negative, likely acting as a "reliever proxy," where a high number of appearances with fewer innings correlates with a lower next-year WAR once other factors are held fixed.
+
+Other Logical Factors: The signs for other features line up with baseball sense: xFIP and BB/9 tilt negative, Zone% is positive, and Age is a touch negative.
+
+### Lasso's Feature Selection
+
+Ignored Features: Most other coefficients "hug zero," which is exactly what Lasso is supposed to do: it keeps the few features that matter and quietly shrinks the rest.
+
+
 
 
 
