@@ -323,4 +323,4 @@ When benchmarked against established industry projections like Steamer and ZiPS,
 
 Looking ahead, several avenues could further enhance the model's accuracy. Incorporating and scoring historical injury data could help account for health risks, while creating a more robust distinction between starting pitchers and relievers could capture the unique performance drivers of each role. For this particular analysis, a unified approach was chosen to maintain a larger and richer dataset, but role-specific modeling is a clear next step for future iterations.
 
-📂 Notebook: [Model Training](notebooks/02-model-training.ipynb)  
+📂 Notebook: [Predictions_Analysis]([notebooks/02-model-training.ipynb](https://github.com/RyanKim04/Predicting-WAR/blob/main/files/predictions_analysis.ipynb))  
