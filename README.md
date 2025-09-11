@@ -1,4 +1,4 @@
-Generate **current-year MLB WAR projections** using lasso regression.
+Generate **current-year MLB WAR projections** using lasso regression.  
 The repo provides a reproducible notebook workflow that outputs a CSV you can share or analyze.
 
 [Open the analysis notebook](files/predictions_analysis.ipynb) •
