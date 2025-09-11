@@ -319,7 +319,7 @@ Finally, we can look at the top 10 pitchers for 2025 as predicted by the model a
 
 - ZiPS (the SZymborski Projection System) is another top system that uses multi-year stats and historical player comparisons to generate a range of potential outcomes for a player.
 
-n summary, the model demonstrated solid predictive performance with an RMSE of 1.084, indicating its forecasts for next-season WAR are typically off by about 1.08 wins. Furthermore, with an R-squared of 0.383, the model successfully explains 38.3% of the year-to-year variance in pitcher performance.
+In summary, the model demonstrated solid predictive performance with an RMSE of 1.084, indicating its forecasts for next-season WAR are typically off by about 1.08 wins. Furthermore, with an R-squared of 0.383, the model successfully explains 38.3% of the year-to-year variance in pitcher performance.
 
 When benchmarked against established industry projections like Steamer and ZiPS, the model proved to be quite credible, identifying a similar cohort of top-tier pitchers and producing comparable results. While more validation would be needed to match their established credibility, this strong initial alignment serves as an excellent proof-of-concept.
 
