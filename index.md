@@ -309,6 +309,8 @@ Other Logical Factors: The signs for other features line up with baseball sense:
 
 Ignored Features: Most other coefficients "hug zero," which is exactly what Lasso is supposed to do: it keeps the few features that matter and quietly shrinks the rest.
 
+---
+
 <img width="781" height="254" alt="image" src="https://github.com/user-attachments/assets/f657c99c-227a-485c-9e7e-2bb2d5091986" />
 
 Finally, we can look at the top 10 pitchers for 2025 as predicted by the model and compare them to the Steamer and ZiPS projections to see how well our model holds up against industry standards. Note that at the time of this report is written, 2025 season has not ended yet so we would not be able to compare with the actual statistic. 
